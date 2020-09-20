@@ -1,6 +1,8 @@
 import React from "react";
 
 import InputWrapper from "../InputWrapper";
+import ErrorMessage from "../ErrorMessage";
+import { StyledInput } from "../../styled";
 
 type Props = {
   label: string;
@@ -28,7 +30,7 @@ const NameInput = ({ label, onChange, validationFn, value }: Props) => {
 
   return (
     <InputWrapper label={label}>
-      <input
+      <StyledInput
         value={stateValue}
         onChange={handleOnTextChange}
         onFocus={() => {
@@ -37,9 +39,20 @@ const NameInput = ({ label, onChange, validationFn, value }: Props) => {
           }
         }}
       />
-      {!isValid && isTouched && <div>{`${label} is invalid.`}</div>}
+      {!isValid && isTouched && (
+        <ErrorMessage>{`${label} is invalid.`}</ErrorMessage>
+      )}
     </InputWrapper>
   );
 };
 
 export default NameInput;
+
+// const StyledInput = styled.input`
+//   width: 100%;
+//   border: none;
+//   border-bottom: 1px solid #999;
+//   padding: 7px;
+//   outline: none;
+//   box-sizing: border-box;
+// `;

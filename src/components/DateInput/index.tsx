@@ -1,6 +1,7 @@
 import React from "react";
 
 import InputWrapper from "../InputWrapper";
+import { StyledInput } from "../../styled";
 
 type Props = {
   label: string;
@@ -27,7 +28,7 @@ const DateInput = ({ label, value, onChange, validationFn }: Props) => {
 
   return (
     <InputWrapper label={label}>
-      <input
+      <StyledInput
         type="date"
         id="start"
         name="trip-start"

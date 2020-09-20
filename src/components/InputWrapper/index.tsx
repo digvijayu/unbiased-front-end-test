@@ -1,4 +1,5 @@
 import React from "react";
+import styled from "styled-components";
 
 type Props = {
   label: string;
@@ -7,11 +8,19 @@ type Props = {
 
 const InputWrapper = ({ label, children }: Props) => {
   return (
-    <div>
-      <div>{label}</div>
+    <Container>
+      <Label>{label}</Label>
       <div>{children}</div>
-    </div>
+    </Container>
   );
 };
 
 export default InputWrapper;
+
+const Label = styled.label`
+  font-size: 9px;
+`;
+
+const Container = styled.div`
+  margin: 10px 0;
+`;

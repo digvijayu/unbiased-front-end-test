@@ -1,6 +1,8 @@
 import React from "react";
+import styled from "styled-components";
 
 import InputWrapper from "../InputWrapper";
+import { inputCss } from "../../styled";
 
 type Props = {
   label: string;
@@ -16,7 +18,7 @@ const Selector = ({ items, value, onChange, label, placeholder }: Props) => {
 
   return (
     <InputWrapper label={label}>
-      <select value={value} onChange={handleOnChange}>
+      <StyledSelect value={value} onChange={handleOnChange}>
         {placeholder && (
           <option key={""} value={""}>
             {placeholder}
@@ -27,9 +29,13 @@ const Selector = ({ items, value, onChange, label, placeholder }: Props) => {
             {item}
           </option>
         ))}
-      </select>
+      </StyledSelect>
     </InputWrapper>
   );
 };
 
 export default Selector;
+
+const StyledSelect = styled.select`
+  ${inputCss}
+`;
