@@ -22,5 +22,5 @@ const Label = styled.label`
 `;
 
 const Container = styled.div`
-  margin: 10px 0;
+  margin: 15px 10px;
 `;
