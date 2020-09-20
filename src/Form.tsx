@@ -8,27 +8,26 @@ import * as constants from "./constants";
 import * as types from "./types";
 import * as validations from "./utils/validations";
 import { Button } from "./styled";
+import useLocalStorageFormData from "./hooks/useLocalStorageFormData";
 
-type State = {
-  name: string;
-  mobile: string;
-  dateOfArrival: Date;
-  airportName?: string;
-  terminalName?: string;
-  flightNumber: string;
+const initialData = {
+  name: "",
+  mobile: "",
+  dateOfArrival: new Date(),
+  airportName: undefined,
+  terminalName: undefined,
+  flightNumber: "",
 };
 
 function App() {
-  const [state, setState] = React.useState<State>({
-    name: "",
-    mobile: "",
-    dateOfArrival: new Date(),
-    airportName: undefined,
-    terminalName: undefined,
-    flightNumber: "",
-  });
+  const [lsFields, setLsFields] = useLocalStorageFormData(initialData);
+
+  const [state, setState] = React.useState<types.FormData>(
+    lsFields || initialData
+  );
 
   const handleOnSubmit = () => {
+    setLsFields(state);
     console.log("state", state);
   };
 
