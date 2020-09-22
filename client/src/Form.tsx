@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { gql, useMutation } from "@apollo/client";
 
 import TextInput from "./components/TextInput";
 import DateInput from "./components/DateInput";
@@ -9,6 +10,19 @@ import * as types from "./types";
 import * as validations from "./utils/validations";
 import { Button } from "./styled";
 import useLocalStorageFormData from "./hooks/useLocalStorageFormData";
+
+const ADD_TRIP = gql`
+  mutation AddTrip($trip: InputTrip) {
+    addTrip(trip: $trip) {
+      name
+      mobile
+      dateOfArrival
+      airportName
+      terminalName
+      flightNumber
+    }
+  }
+`;
 
 const initialData = {
   name: "",
@@ -21,6 +35,7 @@ const initialData = {
 
 function App() {
   const [lsFields, setLsFields] = useLocalStorageFormData(initialData);
+  const [addTrip, { loading, error }] = useMutation(ADD_TRIP);
 
   const [state, setState] = React.useState<types.FormData>(
     lsFields || initialData
@@ -29,6 +44,8 @@ function App() {
   const handleOnSubmit = () => {
     setLsFields(state);
     console.log("state", state);
+    addTrip({ variables: { trip: lsFields } });
+    // addTodo({ variables: { type: input.value } });
   };
 
   const isFormValid =

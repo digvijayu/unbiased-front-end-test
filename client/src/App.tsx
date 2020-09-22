@@ -1,16 +1,24 @@
 import React from "react";
 import styled from "styled-components";
+import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 
 import Form from "./Form";
 import "./App.css";
 
+const client = new ApolloClient({
+  uri: "http://localhost:4000",
+  cache: new InMemoryCache(),
+});
+
 function App() {
   return (
     <AppScreen>
-      <Header>Unbiased Technical Test Task</Header>
-      <FormContainer>
-        <Form />
-      </FormContainer>
+      <ApolloProvider client={client}>
+        <Header>Unbiased Technical Test Task</Header>
+        <FormContainer>
+          <Form />
+        </FormContainer>
+      </ApolloProvider>
     </AppScreen>
   );
 }

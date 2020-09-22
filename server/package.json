@@ -1,0 +1,16 @@
+{
+  "name": "unbiased-test-server",
+  "version": "1.0.0",
+  "description": "mock server to handle the gql mutation",
+  "main": "src/index.js",
+  "author": "Digvijay Upadhyay",
+  "license": "MIT",
+  "scripts": {
+    "start": "nodemon src/index.js"
+  },
+  "dependencies": {
+    "apollo-server": "^2.18.0",
+    "graphql": "^15.3.0",
+    "nodemon": "^2.0.4"
+  }
+}
