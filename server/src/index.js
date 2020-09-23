@@ -33,7 +33,6 @@ const typeDefs = gql`
 const resolvers = {
   Mutation: {
     addTrip: async (_, { trip }, { dataSources }) => {
-      console.log("_, param1, param2", _, trip, dataSources);
       // save data to the database
       return trip;
     },
