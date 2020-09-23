@@ -23,6 +23,7 @@ export const Button = styled.button`
   text-align: center;
   padding: 10px 20px;
   border-radius: 5px;
+  margin: 10px;
 
   :disabled {
     opacity: 0.5;

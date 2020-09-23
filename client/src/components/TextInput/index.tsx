@@ -26,7 +26,10 @@ const NameInput = ({ label, onChange, validationFn, value }: Props) => {
       onChange(newValue);
     }
   };
-  React.useEffect(() => {}, [value]);
+
+  React.useEffect(() => {
+    setStateValue(value);
+  }, [value]);
 
   return (
     <InputWrapper label={label}>

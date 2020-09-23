@@ -26,6 +26,10 @@ const DateInput = ({ label, value, onChange, validationFn }: Props) => {
     return `${dt.getFullYear()}-${month}-${day}`;
   };
 
+  React.useEffect(() => {
+    value && setStateDate(value);
+  }, [value]);
+
   return (
     <InputWrapper label={label}>
       <StyledInput

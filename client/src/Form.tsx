@@ -34,19 +34,24 @@ const initialData = {
 };
 
 function App() {
-  const [lsFields, setLsFields] = useLocalStorageFormData(initialData);
+  const [lsFields, setLsFields] = useLocalStorageFormData(null);
   const [addTrip, { loading, error }] = useMutation(ADD_TRIP);
 
-  const [state, setState] = React.useState<types.FormData>(
-    lsFields || initialData
-  );
+  const [state, setState] = React.useState<types.FormData>(initialData);
 
   const handleOnSubmit = () => {
     setLsFields(state);
-    console.log("state", state);
     addTrip({ variables: { trip: lsFields } });
-    // addTodo({ variables: { type: input.value } });
   };
+
+  const loadFromLocalStorage = () => {
+    console.log("lsFields", lsFields);
+    if (lsFields) {
+      setState(lsFields);
+    }
+  };
+
+  console.log("state", state, state.name);
 
   const isFormValid =
     validations.name(state.name) &&
@@ -116,6 +121,9 @@ function App() {
       <ButtonContainer>
         <Button onClick={handleOnSubmit} disabled={!isFormValid}>
           Submit
+        </Button>
+        <Button onClick={loadFromLocalStorage} disabled={!lsFields}>
+          Load from LocalStorage
         </Button>
       </ButtonContainer>
     </div>

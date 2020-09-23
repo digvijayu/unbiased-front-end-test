@@ -2,23 +2,24 @@ import { FormData } from "../types";
 
 const LOCAL_STORAGE_FORM_KEY = "form-data";
 
-const parseFormValues = (formValueStr: string | null): FormData | undefined => {
+const parseFormValues = (formValueStr: string | null): FormData | null => {
   let formValue;
 
   if (formValueStr) {
     formValue = JSON.parse(formValueStr);
-    formValue.dateOfArrival = formValue.dateOfArrival
-      ? new Date(formValue.dateOfArrival)
-      : new Date();
-    return formValue as FormData;
-  } else {
-    return undefined;
+    if (formValue) {
+      formValue.dateOfArrival = formValue.dateOfArrival
+        ? new Date(formValue.dateOfArrival)
+        : new Date();
+      return formValue as FormData;
+    }
   }
+  return null;
 };
 
 export const useLocalStorageFormData = (
-  initialValue: FormData
-): [FormData | undefined, (setFormValue: FormData) => void] => {
+  initialValue: FormData | null
+): [FormData | null, (setFormValue: FormData) => void] => {
   const formValue = parseFormValues(
     localStorage.getItem(LOCAL_STORAGE_FORM_KEY)
   );
